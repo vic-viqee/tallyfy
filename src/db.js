@@ -58,31 +58,8 @@ const dbApi = {
   },
 
   async seedDataIfNeeded() {
-    const products = await this.getAllProducts();
-    if (products.length === 0) {
-      const seedProducts = [
-        { name: 'Sugar', price: 100, stock: 20, emoji: '🧂', active: true },
-        { name: 'Flour', price: 120, stock: 15, emoji: '🌾', active: true },
-        { name: 'Soap', price: 50, stock: 30, emoji: '🧼', active: true },
-        { name: 'Cooking Oil', price: 200, stock: 10, emoji: '🛢️', active: true },
-        { name: 'Milk', price: 60, stock: 25, emoji: '🥛', active: true },
-        { name: 'Rice', price: 150, stock: 12, emoji: '🍚', active: true }
-      ];
-
-      for (const p of seedProducts) {
-        await this.addProduct(p);
-      }
-
-      const seedCustomers = [
-        { name: 'Abel', totalTransactions: 0 },
-        { name: 'Mary', totalTransactions: 0 },
-        { name: 'John', totalTransactions: 0 }
-      ];
-
-      for (const c of seedCustomers) {
-        await this.addCustomer(c);
-      }
-    }
+    // Starting empty as requested
+    return;
   },
 
   // Products
