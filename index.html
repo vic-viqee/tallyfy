@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#121212">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Tallyfy</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sales Screen -->
+    <div id="sales-screen" class="screen active">
+      <div class="top-bar">
+        <h1>Tallyfy</h1>
+        <span class="date" id="current-date"></span>
+        <button class="btn btn-ghost btn-close" id="close-shop-btn">
+          <span class="material-icons-round">lock</span>
+        </button>
+      </div>
+      <div class="quick-stats">
+        <div class="stat-chip cash">
+          <span class="label">Cash</span>
+          <span class="value" id="today-cash">0</span>
+        </div>
+        <div class="stat-chip mpesa">
+          <span class="label">M-Pesa</span>
+          <span class="value" id="today-mpesa">0</span>
+        </div>
+        <div class="stat-chip debt">
+          <span class="label">Debt</span>
+          <span class="value" id="today-debt">0</span>
+        </div>
+      </div>
+      <div class="bill-display">
+        <div class="bill-total" id="bill-total">0</div>
+        <div class="bill-items" id="bill-items">Tap items to add</div>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+      <div class="bill-actions">
+        <button class="btn" id="clear-bill-btn">
+          <span class="material-icons-round">refresh</span>
+          CLEAR
+        </button>
+      </div>
+      <div class="bill-actions">
+        <button class="btn btn-primary" id="pay-cash-btn">
+          <span class="material-icons-round">payments</span> CASH
+        </button>
+        <button class="btn btn-mpesa" id="pay-mpesa-btn">
+          <span class="material-icons-round">phone_android</span> M-PESA
+        </button>
+        <button class="btn btn-debt" id="pay-debt-btn">
+          <span class="material-icons-round">account_balance_wallet</span> DEBT
+        </button>
+      </div>
+    </div>
+
+    <!-- Debts Screen -->
+    <div id="debts-screen" class="screen">
+      <div class="top-bar">
+        <button class="back-btn" data-screen="sales">
+          <span class="material-icons-round">arrow_back</span> Back
+        </button>
+        <h1>Debts</h1>
+        <span></span>
+      </div>
+      <div class="list-header">
+        <input type="text" class="search-input" id="customer-search" placeholder="Search customers...">
+      </div>
+      <div class="list-content" id="customer-list"></div>
+    </div>
+
+    <!-- Customer Detail Screen -->
+    <div id="customer-detail-screen" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" data-screen="debts">
+          <span class="material-icons-round">arrow_back</span> Back
+        </button>
+        <span class="screen-title" id="customer-name">Customer</span>
+      </div>
+      <div class="total-row">
+        <span class="label">Total Owed</span>
+        <span class="amount" id="customer-debt-total">KSh 0</span>
+      </div>
+      <div class="list-header" style="justify-content: center;">
+        <button class="btn btn-primary btn-sm" id="settle-all-btn">Settle All</button>
+      </div>
+      <div class="list-content" id="debt-items-list"></div>
+    </div>
+
+    <!-- Stock Screen -->
+    <div id="stock-screen" class="screen">
+      <div class="top-bar">
+        <button class="back-btn" data-screen="sales">
+          <span class="material-icons-round">arrow_back</span> Back
+        </button>
+        <h1>Stock</h1>
+        <button class="btn btn-primary btn-sm" id="add-product-btn">
+          <span class="material-icons-round">add</span>
+        </button>
+      </div>
+      <div class="list-content" id="stock-list"></div>
+    </div>
+
+    <!-- History Screen -->
+    <div id="history-screen" class="screen">
+      <div class="top-bar">
+        <button class="back-btn" data-screen="sales">
+          <span class="material-icons-round">arrow_back</span> Back
+        </button>
+        <h1>History</h1>
+        <span></span>
+      </div>
+      <div class="list-content" id="history-list"></div>
+    </div>
+
+    <!-- Day Detail Screen -->
+    <div id="day-detail-screen" class="screen">
+      <div class="screen-header">
+        <button class="back-btn" data-screen="history">
+          <span class="material-icons-round">arrow_back</span> Back
+        </button>
+        <span class="screen-title" id="day-date">Day</span>
+      </div>
+      <div class="list-content" id="day-sales-list"></div>
+    </div>
+
+    <!-- Backup Screen -->
+    <div id="backup-screen" class="screen">
+      <div class="top-bar">
+        <button class="back-btn" data-screen="sales">
+          <span class="material-icons-round">arrow_back</span> Back
+        </button>
+        <h1>Settings</h1>
+        <span></span>
+      </div>
+      <div class="backup-section">
+        <div class="section-title">Data</div>
+        <button class="btn btn-primary" id="export-btn">
+          <span class="material-icons-round">download</span> Download Backup
+        </button>
+        <button class="btn btn-surface" id="import-btn">
+          <span class="material-icons-round">upload</span> Restore from Backup
+        </button>
+        <input type="file" id="import-file" accept=".json" style="display: none;">
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+      <button class="nav-btn active" data-screen="sales">
+        <span class="material-icons-round">point_of_sale</span>
+        <span>Sales</span>
+      </button>
+      <button class="nav-btn" data-screen="debts">
+        <span class="material-icons-round">account_balance_wallet</span>
+        <span>Debts</span>
+      </button>
+      <button class="nav-btn" data-screen="stock">
+        <span class="material-icons-round">inventory_2</span>
+        <span>Stock</span>
+      </button>
+      <button class="nav-btn" data-screen="history">
+        <span class="material-icons-round">history</span>
+        <span>History</span>
+      </button>
+      <button class="nav-btn" data-screen="backup">
+        <span class="material-icons-round">settings</span>
+        <span>More</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal-content"></div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="src/db.js"></script>
+  <script src="src/app.js"></script>
+  <script src="src/sales.js"></script>
+  <script src="src/stock.js"></script>
+  <script src="src/debts.js"></script>
+  <script src="src/history.js"></script>
+  <script src="src/backup.js"></script>
+</body>
+</html>
