@@ -19,7 +19,7 @@ function renderStockList(products) {
   list.innerHTML = products.map(p => `
     <div class="list-item" data-id="${p.id}">
       <div class="info">
-        <div class="name">${p.emoji} ${p.name}</div>
+        <div class="name">${p.name}</div>
         <div class="detail">${formatCurrency(p.price)} • Stock: ${p.stock}</div>
       </div>
       <div class="stock-controls">
@@ -73,7 +73,7 @@ function showEditPriceModal(productId) {
       <h2>Edit Price</h2>
       <div class="form-group">
         <label>Product</label>
-        <input type="text" value="${product.emoji} ${product.name}" readonly>
+        <input type="text" value="${product.name}" readonly>
       </div>
       <div class="form-group">
         <label>New Price (KSh)</label>
@@ -87,19 +87,10 @@ function showEditPriceModal(productId) {
   });
 }
 
-let selectedEmoji = '🧂';
 
 function showAddProductModal() {
-  const emojis = ['🧂', '🌾', '🧼', '🛢️', '🥛', '🍚', '🍫', '🍪', '🧁', '🥜', '🧋', '☕', '🍞', '🥚', '🧈', '🧊', '🥩', '🍗', '🐟', '🥔', '🥕', '🧅', '🍅', '🥬'];
-  
   showModal(`
     <h2>Add New Product</h2>
-    <div class="form-group">
-      <label>Emoji</label>
-      <div class="emoji-picker" id="emoji-picker">
-        ${emojis.map(e => `<div class="emoji-option ${e === '🧂' ? 'selected' : ''}" data-emoji="${e}">${e}</div>`).join('')}
-      </div>
-    </div>
     <div class="form-group">
       <label>Product Name</label>
       <input type="text" id="new-product-name" placeholder="e.g., Sugar">
@@ -118,17 +109,7 @@ function showAddProductModal() {
     </div>
   `);
 
-  selectedEmoji = '🧂';
-  document.querySelectorAll('.emoji-option').forEach(opt => {
-    opt.addEventListener('click', () => {
-      document.querySelectorAll('.emoji-option').forEach(o => o.classList.remove('selected'));
-      opt.classList.add('selected');
-      selectedEmoji = opt.dataset.emoji;
-    });
-  });
-}
-
-async function addNewProduct() {
+  renderStockTable();
   const name = document.getElementById('new-product-name').value.trim();
   const price = parseInt(document.getElementById('new-product-price').value) || 0;
   const stock = parseInt(document.getElementById('new-product-stock').value) || 0;
@@ -146,7 +127,6 @@ async function addNewProduct() {
     name,
     price,
     stock,
-    emoji: selectedEmoji,
     active: true
   });
 

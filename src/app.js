@@ -60,7 +60,7 @@ function updateBillDisplay() {
   const total = currentBill.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   totalEl.textContent = formatCurrency(total);
   
-  const itemSummary = currentBill.map(item => `${item.emoji} ${item.name} x${item.quantity}`).join(', ');
+  const itemSummary = currentBill.map(item => `${item.name} x${item.quantity}`).join(', ');
   itemsEl.textContent = itemSummary || 'Tap items to add';
 }
 

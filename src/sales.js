@@ -9,7 +9,6 @@ function renderProductGrid() {
   const grid = document.getElementById('product-grid');
   grid.innerHTML = products.map(p => `
     <div class="product-btn ${p.stock === 0 ? 'out-of-stock' : ''}" data-id="${p.id}">
-      <span class="emoji">${p.emoji}</span>
       <span class="name">${p.name}</span>
       <span class="price">${formatCurrency(p.price)}</span>
       <span class="stock">${p.stock > 0 ? `Stock: ${p.stock}` : 'Out of Stock'}</span>
@@ -35,7 +34,6 @@ async function addToBill(productId) {
     currentBill.push({
       id: product.id,
       name: product.name,
-      emoji: product.emoji,
       price: product.price,
       quantity: 1
     });
