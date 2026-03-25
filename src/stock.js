@@ -108,8 +108,9 @@ function showAddProductModal() {
       <button class="btn btn-primary" onclick="addNewProduct()">Add Product</button>
     </div>
   `);
+}
 
-  renderStockTable();
+async function addNewProduct() {
   const name = document.getElementById('new-product-name').value.trim();
   const price = parseInt(document.getElementById('new-product-price').value) || 0;
   const stock = parseInt(document.getElementById('new-product-stock').value) || 0;
