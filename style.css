@@ -240,6 +240,29 @@ body {
   font-size: 22px;
 }
 
+.app-footer {
+  padding: 12px 18px;
+  text-align: center;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.app-footer p {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.app-footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.app-footer a:hover {
+  color: var(--accent);
+}
+
 .bill-display {
   background: var(--surface);
   padding: 24px 18px;
