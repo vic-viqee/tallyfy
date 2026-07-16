@@ -2,6 +2,14 @@
 
 Tallyfy is a lightweight, offline-first retail management web application designed for small shop owners. It provides a simple, "tally-style" interface to track sales, manage inventory, and handle customer debts with ease.
 
+## Live Demo
+
+- **App**: [https://tallyfy.netlify.app/](https://tallyfy.netlify.app/)
+
+## About
+
+A PWA built for Kenyan dukas (small shops) that works entirely offline. Shop owners can ring up sales, accept cash/M-Pesa/debt, track customer balances, manage inventory, and export backups — all from their phone with no internet required. Install it like a native app on Android, iOS, or desktop.
+
 ## ✨ Features
 
 - **Point of Sale (POS):** Tap-to-add product grid with real-time bill calculation.
@@ -63,7 +71,4 @@ Tallyfy respects your privacy. All data entered into the application is stored *
 
 **Note:** Clearing your browser's site data or cache will delete your records. **Regularly use the "Download Backup" feature** in the Settings screen to keep your data safe.
 
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
 # tallyfy
